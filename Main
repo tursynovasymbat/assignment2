@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        School school = new School("Almaty School", "Almaty");
+        school.displaySchool();
+
+        System.out.println("\nStudents");
+
+        ArrayList<Student> students = new ArrayList<>();
+
+        students.add(new Student(1, "Aruzhan", 10));
+        students.add(new Student(2, "Dias", 11));
+        students.add(new Student(3, "Symbat", 9));
+
+        // Полиморфизм
+        for (Person s : students) {
+            s.displayInfo();
+            System.out.println();
+        }
+
+        // Фильтрация (grade > 9)
+        System.out.println("Students with grade > 9:");
+        for (Student s : students) {
+            if (s.getGrade() > 9) {
+                System.out.println(s);
+            }
+        }
+
+        students.sort(Comparator.comparingInt(Student::getGrade));
+
+        System.out.println("\nSorted students:");
+        for (Student s : students) {
+            System.out.println(s);
+        }
+
+        System.out.print("\nEnter student name to search: ");
+        String searchName = scanner.nextLine();
+
+        for (Student s : students) {
+            if (s.getName().equalsIgnoreCase(searchName)) {
+                System.out.println("Found: " + s);
+            }
+        }
+
+        scanner.close();
+    }
+}
